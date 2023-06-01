@@ -1,31 +1,3 @@
-//jshint esversion:6
-
-// const { MongoClient, ServerApiVersion } = require('mongodb');
-// const uri = "mongodb+srv://Cluster67555:WmB5cntke0pf@cluster67555.pzybjxz.mongodb.net/?retryWrites=true&w=majority";
-
-// // Create a MongoClient with a MongoClientOptions object to set the Stable API version
-// const client = new MongoClient(uri, {
-//   serverApi: {
-//     version: ServerApiVersion.v1,
-//     strict: true,
-//     deprecationErrors: true,
-//   }
-// });
-
-// async function run() {
-//   try {
-//     // Connect the client to the server	(optional starting in v4.7)
-//     await client.connect();
-//     // Send a ping to confirm a successful connection
-//     await client.db("admin").command({ ping: 1 });
-//     console.log("Pinged your deployment. You successfully connected to MongoDB!");
-//   } finally {
-//     // Ensures that the client will close when you finish/error
-//     await client.close();
-//   }
-// }
-// run().catch(console.dir);
-
 const express = require("express");
 const bodyParser = require("body-parser");
 // const date = require(__dirname + "/date.js");
@@ -39,8 +11,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-// mongoose.connect("mongodb://localhost:27017/todolistDB",{useNewUrlParser: true});//localhost
-mongoose.connect("mongodb+srv://Cluster67555:WmB5cntke0pf@cluster67555.pzybjxz.mongodb.net/todolistDB")
+mongoose.connect("mongodb://localhost:27017/todolistDB",{useNewUrlParser: true});//localhost
 
 const itemsSchema = {
   name: String
@@ -65,12 +36,6 @@ const listSchema = {
 };
 const List = mongoose.model("List",listSchema);
 
-// Item.deleteOne({name:"Hit the + button to add a new item"}).then(()=>{
-//   console.log("Deleted!");
-// }).catch((err)=>{
-//   console.log(err);
-// })
-// const items = ["Buy Food", "Cook Food", "Eat Food"];
 const workItems = [];
 
 app.get("/", function(req, res) {
@@ -149,11 +114,6 @@ app.post("/delete",function(req,res){
 }
 
 })
-
-
-// app.get("/work", function(req,res){
-//   res.render("list", {listTitle: "Work List", newListItems: workItems});
-// });
 
 app.get("/about", function(req, res){
   res.render("about");
